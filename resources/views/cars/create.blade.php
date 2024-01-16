@@ -21,6 +21,10 @@
                     <option value="1">Occupé</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="price">Prix:</label>
+                <input type="number" name="price" class="form-control" value=0 min="0" required>
+            </div>
             <button type="submit" class="btn btn-primary">Ajouter la Voiture</button>
         </form>
     </div>

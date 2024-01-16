@@ -14,12 +14,17 @@ use App\Http\Controllers\CarController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', [CarController::class, 'index']);
+Route::get('/home', [CarController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('cars', CarController::class);
+
+Route::get('/cars/{car}/rent', [CarController::class, 'rent'])->name('cars.rent');

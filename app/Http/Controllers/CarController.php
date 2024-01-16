@@ -49,12 +49,21 @@ class CarController extends Controller
             'brand' => 'required',
             'model' => 'required',
             'status' => 'required',
+            'price' => 'required|numeric|min:0',
         ]);
 
         $car = Car::findOrFail($id);
         $car->update($request->all());
 
         return redirect()->route('cars.index')->with('succès', 'Voiture modifiée avec succès.');
+    }
+
+    public function rent(Car $car)
+    {
+        return view('cars.rent', [
+            'car' => $car,
+            'days' => request('days'),
+        ]);
     }
 
     public function destroy($id)

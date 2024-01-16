@@ -22,6 +22,10 @@
                     <option value="1" @if($car->status == 1) selected @endif>Occupé</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="price">Prix:</label>
+                <input type="number" name="price" class="form-control" value="{{ $car->price }}" min="0" required>
+            </div>
             <button type="submit" class="btn btn-primary">Mettre à jour</button>
         </form>
     </div>
