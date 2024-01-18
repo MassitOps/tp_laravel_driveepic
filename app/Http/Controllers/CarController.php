@@ -13,6 +13,12 @@ class CarController extends Controller
         return view('cars.index', compact('cars'));
     }
 
+    public function home()
+    {
+        $cars =  Car::take(4)->get();
+        return view('home', compact('cars'));
+    }
+
     public function create()
     {
         return view('cars.create');
@@ -63,7 +69,17 @@ class CarController extends Controller
         return view('cars.rent', [
             'car' => $car,
             'days' => request('days'),
+            'start_date' => request('start_date'),
+            'end_date' => request('end_date'),
         ]);
+    }
+
+    public function showUsers($carId)
+    {
+        $car = Car::findOrFail($carId);
+        $users = $car->users->unique();
+
+        return view('cars.show_users', compact('car', 'users'));
     }
 
     public function destroy($id)
@@ -72,5 +88,11 @@ class CarController extends Controller
         $car->delete();
 
         return redirect()->route('cars.index')->with('succès', 'Voiture supprim"e avec succès.');
+    }
+
+    public function __construct()
+    {
+        $this->middleware('admin')->only('create', 'edit', 'destroy');
+        $this->middleware('auth')->only('rent', 'showUsers');
     }
 }

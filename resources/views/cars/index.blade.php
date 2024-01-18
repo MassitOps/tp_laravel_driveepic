@@ -1,39 +1,49 @@
 @extends('layouts.app')
 
+@if(session('success'))
+    <script>
+        alert("{{ session('success') }}");
+    </script>
+@endif
+
 @section('content')
     <div class="container">
         
-        <h1 class="my-4">Liste des Voitures</h1>
+        <h1 class="my-4 fw-bold text-white">LISTE DES VOITURES</h1>
 
-        <a href="{{ route('cars.create') }}" class="btn btn-success mb-3">Ajouter une Voiture</a>
+        @auth
+            @if(auth()->user()->isadmin)
+                <a href="{{ route('cars.create') }}" class="btn btn-success mb-3">Ajouter une Voiture</a>
+            @endif
+        @endauth
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Marque</th>
-                    <th>Modele</th>
-                    <th>Statut</th>
-                    <th>Prix Journalier</th>
-                    <th>Actions</th>
+                    <th class="text-white">ID</th>
+                    <th class="text-white">Marque</th>
+                    <th class="text-white">Modele</th>
+                    <th class="text-white">Statut</th>
+                    <th class="text-white">Prix Journalier</th>
+                    <th class="text-white">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($cars as $car)
                     <tr>
-                        <td>{{ $car->id }}</td>
-                        <td>{{ $car->brand }}</td>
-                        <td>{{ $car->model }}</td>
-                        <td>
+                        <td class="text-white">{{ $car->id }}</td>
+                        <td class="text-white">{{ $car->brand }}</td>
+                        <td class="text-white">{{ $car->model }}</td>
+                        <td class="text-white">
                             @if ($car->status == 0)
                                 Disponible
                             @else
                                 Occupé
                             @endif
                         </td>
-                        <td>{{ $car->price }} &nbsp; &nbsp; FCFA</td>
-                        <td>
-                            <a href="{{ route('cars.show', $car->id) }}" class="btn btn-info">Détails/Louer</a>
+                        <td class="text-white">{{ $car->price }} &nbsp; &nbsp; FCFA</td>
+                        <td class="text-white">
+                            <a href="{{ route('cars.show', $car->id) }}" class="btn btn-primary">Détails/Louer</a>
                             @auth
                                 @if(auth()->user()->isadmin)
                                     <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary">Modifier</a>

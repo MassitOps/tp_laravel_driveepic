@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,8 @@ use App\Http\Controllers\CarController;
     return view('welcome');
 });*/
 
-Route::get('/', [CarController::class, 'index']);
-Route::get('/home', [CarController::class, 'index']);
+Route::get('/', [CarController::class, 'home']);
+Route::get('/home', [CarController::class, 'home']);
 
 Auth::routes();
 
@@ -28,3 +29,9 @@ Auth::routes();
 Route::resource('cars', CarController::class);
 
 Route::get('/cars/{car}/rent', [CarController::class, 'rent'])->name('cars.rent');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+});
+Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
+Route::get('/cars/{car}/users', [CarController::class, 'showUsers'])->name('cars.show_users');

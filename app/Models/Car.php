@@ -11,6 +11,11 @@ class Car extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'rentals')->withTimestamps();
+        return $this->belongsToMany(User::class, 'reservations')->withTimestamps();
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }
