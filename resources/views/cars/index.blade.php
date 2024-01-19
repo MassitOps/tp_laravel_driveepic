@@ -8,14 +8,15 @@
 
 @section('content')
     <div class="container">
-        
-        <h1 class="my-4 fw-bold text-white">LISTE DES VOITURES</h1>
-
-        @auth
-            @if(auth()->user()->isadmin)
-                <a href="{{ route('cars.create') }}" class="btn btn-success mb-3">Ajouter une Voiture</a>
-            @endif
-        @endauth
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="my-4 fw-bold text-white">LISTE DES VOITURES</h1>
+    
+            @auth
+                @if(auth()->user()->isadmin)
+                    <a href="{{ route('cars.create') }}" class="btn btn-success mb-3 fw-bold fs-5" style="margin-right: 7.5%">AJOUTER UNE VOITURE</a>
+                @endif
+            @endauth
+        </div>
 
         <table class="table">
             <thead>
