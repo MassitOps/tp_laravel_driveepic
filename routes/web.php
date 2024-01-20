@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
 });
 Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
+Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
 Route::get('/cars/{car}/users', [CarController::class, 'showUsers'])->name('cars.show_users');
 
 Route::middleware(['auth'])->group(function () {

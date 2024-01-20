@@ -65,11 +65,31 @@
                             @auth
                                 @if(auth()->user()->isadmin)
                                     <a href="{{ route('cars.edit', $car->id) }}" class="btn btn-primary">Modifier</a>
-                                    <form action="{{ route('cars.destroy', $car->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Supprimer</button>
-                                    </form>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal_{{ $car->id }}">
+                                        Supprimer
+                                    </button>
+
+                                    <div class="modal fade" id="confirmDeleteModal_{{ $car->id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel_{{ $car->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content bg-dark text-white">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="confirmDeleteModalLabel_{{ $car->id }}">Confirmation de Suppression</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Êtes-vous sûr de vouloir supprimer cette voiture ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                                    <form method="POST" action="{{ route('cars.destroy', ['car' => $car->id]) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endif
                             @endauth
                         </td>

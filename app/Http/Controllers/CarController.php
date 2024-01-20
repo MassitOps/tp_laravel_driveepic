@@ -87,7 +87,7 @@ class CarController extends Controller
         $car = Car::findOrFail($id);
         $car->delete();
 
-        return redirect()->route('cars.index')->with('succès', 'Voiture supprim"e avec succès.');
+        return redirect()->route('cars.index')->with('succès', 'Voiture supprimée avec succès.');
     }
 
     public function __construct()
