@@ -65,10 +65,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    {{-- <a class="dropdown-item" href="{{ url('/') }}"
-                                        onclick="{{ url('/') }}">
-                                        Accueil
-                                    </a> --}}
+                                    <a class="dropdown-item fs-6 fw-bold" href="{{ route('auth.profile.index') }}">
+                                        Mon Profil
+                                    </a>
                                     <a class="dropdown-item fs-6 fw-bold" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

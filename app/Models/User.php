@@ -17,4 +17,9 @@ class User extends AuthenticatableUser implements Authenticatable
     {
         return $this->belongsToMany(Car::class, 'rentals')->withTimestamps();
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

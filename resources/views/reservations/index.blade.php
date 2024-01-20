@@ -7,9 +7,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="text-white">ID</th>
-                    <th class="text-white">ID Utilisateur</th>
-                    <th class="text-white">ID Voiture</th>
+                    <th class="text-white">ID Réservation</th>
+                    <th class="text-white">Voiture</th>
                     <th class="text-white">Date de Début</th>
                     <th class="text-white">Date de Fin</th>
                 </tr>
@@ -18,8 +17,7 @@
                 @foreach ($reservations as $reservation)
                     <tr>
                         <td class="text-white">{{ $reservation->id }}</td>
-                        <td class="text-white">{{ $reservation->user_id }}</td>
-                        <td class="text-white">{{ $reservation->car_id }}</td>
+                        <td class="text-white">{{ $reservation->car->brand }} {{ $reservation->car->model }}</td>
                         <td class="text-white">{{ $reservation->start_date }}</td>
                         <td class="text-white">{{ $reservation->end_date }}</td>
                     </tr>

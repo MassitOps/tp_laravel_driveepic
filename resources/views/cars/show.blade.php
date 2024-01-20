@@ -38,14 +38,13 @@
                         <div id="summary" style="display: none;">
                             <a href="{{ route('cars.rent', ['car' => $car->id]) }}" class="btn btn-primary">Confirmer la location</a>
                         </div>
-        
-                        <div class="mt-3">
-                            <a href="{{ route('cars.show_users', ['car' => $car->id]) }}" class="btn btn-primary">Voir les personnes ayant loué ce véhicule</a>
-                        </div>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-primary">Se connecter pour Louer</a>
                     @endauth
                 @endif
+                <div class="mt-3">
+                    <a href="{{ route('cars.show_users', ['car' => $car->id]) }}" class="btn btn-primary">Voir les personnes ayant loué ce véhicule</a>
+                </div>
             </div>
             @php
                 $brandLower = strtolower($car->brand);

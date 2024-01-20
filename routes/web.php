@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\Auth\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,6 @@ Route::get('/home', [CarController::class, 'home']);
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::resource('cars', CarController::class);
 
 Route::get('/cars/{car}/rent', [CarController::class, 'rent'])->name('cars.rent');
@@ -35,3 +34,9 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations.store');
 Route::get('/cars/{car}/users', [CarController::class, 'showUsers'])->name('cars.show_users');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('auth.profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('auth.profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('auth.profile.destroy');
+});
